@@ -1,8 +1,8 @@
 {
   "name": "tg_bot_nest",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Telegram bot for ChatGPT with the ability to send not only text, but also voice messages.",
+  "author": "ivankirikgavrilenko@gmail.com",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
