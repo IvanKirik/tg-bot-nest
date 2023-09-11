@@ -21,9 +21,11 @@ export class ConverterService {
           .on('end', () => {
             removeFile(input)
             resolve(outputPath)
+
           })
           .on('error', (err) => {
             reject(err.message)
+            console.log(err.message)
           })
           .run()
       })
@@ -54,6 +56,5 @@ export class ConverterService {
     } catch (e: any) {
       console.log(`Error while creating ogg ${e.message}`)
     }
-
   }
 }

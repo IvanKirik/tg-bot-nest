@@ -99,7 +99,6 @@ export class TelegramUpdate {
       const userId = String(ctx.message.from.id);
       const oggFilePath = await this.converterService.create(link.href, userId);
       const mp3Path = await this.converterService.toMp3(oggFilePath, userId);
-
       const text = await this.openAiService.transcription(mp3Path);
 
       await ctx.reply(code(`Ваш запрос: ${text}`));
