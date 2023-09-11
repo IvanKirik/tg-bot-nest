@@ -1,23 +1,30 @@
 import { Module } from '@nestjs/common';
-import { OpenAiModule } from './open-ai/open-ai.module';
 import { ConverterModule } from './converter/converter.module';
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TelegramModule } from "./telegram/telegram.module";
 import { TelegrafModule } from "nestjs-telegraf";
 import { getTelegramConfig } from "./config/telegram.config";
-import { getOpenAiConfig } from "./config/openAi.config";
-import { TelegramService } from "./telegram/telegram.service";
+import { SequelizeModule } from "@nestjs/sequelize";
+import { getConfigPostgres } from "./config/postgres.config";
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: `${process.env.NODE_ENV}.env`
+    }),
     TelegrafModule.forRootAsync({
       imports: [ConfigModule, TelegramModule],
       useFactory: getTelegramConfig,
-      inject: [ConfigService],
+      inject: [ConfigService]
     }),
-    ConverterModule,
-    TelegramModule
+    SequelizeModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: getConfigPostgres,
+      inject: [ConfigService]
+    }),
+    TelegramModule,
+    UsersModule
   ]
 })
 export class AppModule {}

@@ -1,4 +1,1 @@
-export enum ChatModel {
-  GPT3 = 'gpt-3.5-turbo',
-  GPT4 = 'gpt-4'
-}
+export type ChatModelType = 'gpt-4' | 'gpt-3.5-turbo';

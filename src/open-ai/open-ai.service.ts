@@ -2,14 +2,15 @@ import { Global, Inject, Injectable } from "@nestjs/common";
 import { OPEN_AI_OPTIONS } from "./openAi.constants";
 import { IOpenAiOptionsInterface } from "./openAi.interface";
 import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai";
-import { ChatModel } from "../type/chatModel.type";
+import { ChatModelType } from "../type/chatModel.type";
+import { createReadStream } from "fs";
 
 @Global()
 @Injectable()
 export class OpenAiService {
 
     public options: Configuration;
-    public model: ChatModel;
+    public model: ChatModelType;
     private openAi: OpenAIApi;
     private sessions: ChatCompletionRequestMessage[] = [];
 
@@ -21,7 +22,7 @@ export class OpenAiService {
         this.sessions.push(session)
     }
 
-    set chatModel(model: ChatModel) {
+    set chatModel(model: ChatModelType) {
         this.model = model;
     }
 
@@ -30,14 +31,12 @@ export class OpenAiService {
     ) {
         this.options = new Configuration({apiKey: options.apiKey});
         this.openAi = new OpenAIApi(this.options);
-
     }
 
     public async chat(messages: ChatCompletionRequestMessage[]) {
         try {
-            // console.log(this.model);
             const response = await this.openAi.createChatCompletion({
-                model: 'gpt-3.5-turbo',
+                model: this.model ?? 'gpt-4',
                 messages,
             })
             return response.data.choices[0].message;
@@ -58,6 +57,19 @@ export class OpenAiService {
 
         } catch (e) {
             console.log(`Error while create image`)
+        }
+    }
+
+    async transcription(filePath: any) {
+        try {
+            const response = await this.openAi.createTranscription(
+              // @ts-ignore
+              createReadStream(filePath),
+              'whisper-1'
+            )
+            return response.data.text;
+        } catch (e: any) {
+            console.log(`Error while transcription ${e.message}`)
         }
     }
 }

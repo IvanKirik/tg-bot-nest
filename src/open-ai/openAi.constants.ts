@@ -1,4 +1,6 @@
+import { ChatModelType } from "../type/chatModel.type";
+
 export const OPEN_AI_OPTIONS = 'OPEN_AI_OPTIONS';
 export const OPEN_AI_SERVICE = 'OPEN_AI_SERVICE';
-export const GPT3: string = 'gpt-3.5';
-export const GPT4: string = 'gpt-4';
+export const GPT3: ChatModelType = 'gpt-3.5-turbo';
+export const GPT4: ChatModelType = 'gpt-4';

@@ -4,6 +4,8 @@ import { TelegramService } from "./telegram.service";
 import { OpenAiModule } from "../open-ai/open-ai.module";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { getOpenAiConfig } from "../config/openAi.config";
+import { UsersModule } from "../users/users.module";
+import { ConverterModule } from "../converter/converter.module";
 
 
 @Module({
@@ -14,6 +16,8 @@ import { getOpenAiConfig } from "../config/openAi.config";
       useFactory: getOpenAiConfig,
       inject: [ConfigService]
     }),
+    UsersModule,
+    ConverterModule
   ],
   providers: [
     TelegramUpdate,
