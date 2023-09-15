@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { getOpenAiConfig } from "../config/openAi.config";
 import { UsersModule } from "../users/users.module";
 import { ConverterModule } from "../converter/converter.module";
+import {NewUserScene} from "./scenes/newUser.scene";
 
 
 @Module({
@@ -21,7 +22,8 @@ import { ConverterModule } from "../converter/converter.module";
   ],
   providers: [
     TelegramUpdate,
-    TelegramService
+    TelegramService,
+    NewUserScene
   ],
 })
 export class TelegramModule { }

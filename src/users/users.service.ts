@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-import { User } from "./user.model";
+import {User} from "./user.model";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { USER_IS_NOT_FOUND } from "./users.constants";
 import { Repository } from "sequelize-typescript";

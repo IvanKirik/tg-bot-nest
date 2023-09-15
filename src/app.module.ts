@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { ConverterModule } from './converter/converter.module';
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TelegramModule } from "./telegram/telegram.module";
 import { TelegrafModule } from "nestjs-telegraf";

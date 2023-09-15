@@ -12,6 +12,6 @@ export const getConfigPostgres = async (configService: ConfigService): Promise<S
     database: await configService.get('DB_NAME'),
     models: [User],
     autoLoadModels: true,
-    synchronize: true
+    synchronize: true,
   }
 }

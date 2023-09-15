@@ -36,7 +36,7 @@ export class OpenAiService {
     public async chat(messages: ChatCompletionRequestMessage[]) {
         try {
             const response = await this.openAi.createChatCompletion({
-                model: this.model ?? 'gpt-4',
+                model: this.model ?? 'gpt-3.5-turbo',
                 messages,
             })
             return response.data.choices[0].message;
